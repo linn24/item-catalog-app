@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner items">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ category.name }} Items ({{ item_count }} items)
+			{% include "user_info.html" %}
+			</h1>
+		</div>
+	</div>
+
+	{% include "message.html" %}
+
+	{% if items !=[] %}
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				{% for i in items %}
+					<div class="catalog-item">
+						<a href="{{url_for('viewItem', cat_name = category.name, item_title = i.title)}}">{{i.title}}</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner items">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ item.title }}
+			{% include "user_info.html" %}
+			</h1>
+
+		</div>
+	</div>
+
+	{% include "message.html" %}
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<p>{{item.description}}</p>
+			{% if  (session and session['username']) %}
+				<a href="{{ url_for('editItem', item_title = item.title) }}">Edit</a> |
+				<a href="{{ url_for('deleteItem', item_title = item.title)}}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

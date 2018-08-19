@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Categories</h1>
+		</div>
+	</div>
+	
+	{% include "message.html" %}
+
+	<div class="row">
+		<div class="col-md-3 category-list">
+			{% for category in categories %}
+				<a href = "{{url_for('showItems', cat_name = category.name)}}">
+					<h3>{{category.name}}</h3>
+				</a>
+			{% endfor %}
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-3 catalog-item">
+			{% if  (session and session['username']) %}
+				<a href = "{{url_for('addItem')}}" >
+					Add Item
+				</a>
+			{% endif %}
+			<h2>Latest Items</h2>
+			{% for item in latest_items %}
+				<a href = "{{url_for('viewItem', cat_name = item.category.name, item_title = item.title)}}">
+					{{item.title}}
+				</a><em>({{item.category.name}})</em><br/>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

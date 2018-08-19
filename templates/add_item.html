@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner items">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>Add New Item
+			{% include "user_info.html" %}
+			</h1>
+		</div>
+	</div>
+	
+	{% include "message.html" %}
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<form action="{{url_for('addItem')}}" method = 'post'>
+				<label for="txtTitle">Title</label><br/>
+				<input type="text" name="txtTitle" /><br/><br/>
+
+				<label for="txtDesc">Description</label><br/>
+				<textarea name="txtDesc" cols="80" rows="5"></textarea><br/><br/>
+
+				<label for="txtCat">Category</label><br/>
+				{% if categories %}
+				  	<select name="txtCat">
+				  	{% for cat in categories %}
+				  		<option value={{cat.id}}>{{cat.name}}</option>
+				  	{% endfor %}
+					</select>
+				{% endif %}
+				<br/><br/>
+
+				<input type='submit' value='Submit'>
+			</form>
+		</div>
+	</div>
+{% endblock %}
